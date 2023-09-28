@@ -8,16 +8,17 @@ const Home = () => {
   const handlesearch = async () => {
     console.log(moviename);
     if (moviename.length <= 0) {
-    } else {
-      await fetch(`http://www.omdbapi.com/?t=${moviename}&apikey=${key}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setMoviedata(data);
-          console.log(moviedata);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      return;
+    }
+    try {
+      const response = await fetch(
+        `http://www.omdbapi.com/?t=${moviename}&apikey=${key}`
+      );
+      const data = await response.json();
+      setMoviedata(data);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
     }
   };
   return (
