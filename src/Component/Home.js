@@ -15,8 +15,11 @@ const Home = () => {
         `http://www.omdbapi.com/?t=${moviename}&apikey=${key}`
       );
       const data = await response.json();
-      setMoviedata(data);
-      console.log(data);
+      if (data.error === "Movie not found!") {
+        console.log("movie not found");
+      } else {
+        setMoviedata(data);
+      }
     } catch (err) {
       console.log(err);
     }
