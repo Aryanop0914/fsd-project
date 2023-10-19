@@ -10,13 +10,13 @@ const Home = () => {
     if (moviename.length <= 0) {
       return;
     }
+    const response = await fetch(
+      `http://www.omdbapi.com/?t=${moviename}&apikey=${key}`
+    );
     try {
-      const response = await fetch(
-        `http://www.omdbapi.com/?t=${moviename}&apikey=${key}`
-      );
       const data = await response.json();
       if (data.error === "Movie not found!") {
-        console.log("movie not found");
+        console.log("Movie not found");
       } else {
         setMoviedata(data);
       }
